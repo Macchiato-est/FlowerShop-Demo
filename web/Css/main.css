@@ -1,0 +1,586 @@
+/* =========================
+   1. BASE & LAYOUT TỔNG
+========================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    background: #fafafa;
+    color: #333;
+    scroll-behavior: smooth;
+}
+
+/* KHÔNG dùng flex-body nữa để tránh ảnh hưởng sticky */
+body {
+    margin: 0;
+}
+
+/* main chỉ là block bình thường */
+main {
+    display: block;
+}
+
+/* =========================
+   2. BANNER LAYOUT (banner.jsp)
+========================= */
+.top-banner {
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.banner-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* =========================
+   3. HEADER / TOP MENU – STICKY
+========================= */
+/* Thanh header cố định trên cùng */
+.topmenu {
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 100;                     /* nổi hơn banner & content */
+    background-color: #ffffff;
+    border-bottom: 1px solid #ffe0ea; /* viền hồng nhạt */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* Dòng menu dưới logo */
+.topmenu nav .nav {
+    justify-content: center;
+    column-gap: 24px;
+}
+
+/* Logo thương hiệu */
+.brand {
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: 0.5px;
+    color: #222;
+}
+
+/* Link menu */
+.nav .nav-link {
+    font-weight: 500;
+    color: #555;
+    transition: color 0.2s ease;
+}
+
+.nav .nav-link:hover,
+.nav .nav-link:focus,
+.nav .nav-link.active {
+    color: #ff7ba0;                   /* hồng đồng bộ với search / nút */
+}
+
+
+/* Nút giỏ hàng + đăng nhập / tài khoản */
+.topmenu .btn-header-pill {
+    border-radius: 999px;      /* pill nhẹ */
+    padding: 6px 18px;         /* thấp hơn để không bị “bánh chưng” */
+    font-weight: 500;
+    font-size: 14px;
+}
+
+/* Giỏ hàng viền hồng */
+.btn-cart {
+    border-color: #ff4d8d;
+    color: #ff4d8d;
+}
+
+/* Account xám */
+.btn-account {
+    border-color: #d0d3dc;
+    color: #555;
+}
+
+/* Đăng nhập: action chính */
+.topmenu .btn-primary {
+    background-color: #ff4d8d;
+    border-color: #ff4d8d;
+}
+
+/* Hover đậm hơn chút */
+.topmenu .btn-primary:hover {
+    background-color: #e53c7a;
+    border-color: #e53c7a;
+}
+
+/* Giỏ hàng + Đăng ký outline hồng */
+.topmenu .btn-outline-primary {
+    color: #ff4d8d;
+    border-color: #ff4d8d;
+}
+
+.topmenu .btn-outline-primary:hover {
+    background-color: #ff4d8d;
+    color: #fff;
+}
+
+
+/* Thanh tìm kiếm dạng pill */
+.search-form {
+    display: flex;
+    align-items: center;
+    max-width: 480px;
+    width: 100%;
+    height: 40px;                 /* chiều cao cố định */
+    border-radius: 999px;
+    border: 1px solid #ff4d8d;    /* viền hồng */
+    background-color: #ffffff;
+    overflow: hidden;             /* bo tròn cả nút bên phải */
+}
+
+/* Ô input */
+.search-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 0 16px;              
+    font-size: 14px;
+    background: transparent;
+}
+
+.search-input::placeholder {
+    color: #9fa3b1;
+}
+
+/* Nút kính lúp */
+.search-btn {
+    border: none;
+    outline: none;
+    width: 52px;
+    height: 100%;                 
+    background-color: #ff4d8d;    /* hồng cùng màu viền */
+    color: #ffffff;               /* icon trắng */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+}
+
+.search-btn:hover {
+    background-color: #e53c7a;    
+}
+
+/* =========================
+   4. KHUNG MAIN: LEFT MENU + CONTENT
+========================= */
+
+/* Row chứa leftmenu + content (đã thêm class layout-row trong index)
+   Để mặc định align-items: stretch cho 2 cột cao bằng nhau */
+.layout-row {
+    align-items: stretch;
+}
+
+/* Cột chứa aside (Bootstrap col-3) */
+.layout-row > .col-12.col-md-3 {
+    flex-shrink: 0;
+}
+
+/* Khung aside bọc menu – sticky luôn cả khối */
+.leftmenu-wrapper {
+    width: 240px;
+    position: sticky;
+    top: 120px;  /* khoảng cách: dưới header ~ 120px */
+    align-self: flex-start;
+}
+
+/* Hộp menu bên trong */
+.left-menu {
+    position: relative;
+    background: #fff8fb;                 /* nền hồng rất nhạt*/
+    border-radius: 12px;
+    padding: 16px 18px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    border: 1px solid #ffe0ea;
+}
+
+/* Tiêu đề left menu */
+.left-menu h5 {
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #ff7ba0; /* màu nhấn */
+}
+
+/* List danh mục */
+.left-menu .list-group {
+    margin: 0;
+    padding: 0;
+}
+
+.left-menu .list-group-item {
+    border: none;
+    padding: 8px 0;
+    background: transparent;
+}
+
+.left-menu .list-group-item a {
+    color: #555;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.left-menu .list-group-item a:hover {
+    color: #ff7ba0;
+}
+
+/* CONTENT BÊN PHẢI (cột 9) */
+.layout-row > section.col-12.col-md-9 {
+    flex: 1;
+    max-width: 100%;
+}
+
+/* Mobile - viết tạm chưa test kkeke */
+@media (max-width: 768px) {
+    .leftmenu-wrapper {
+        position: static;
+        width: 100%;
+        margin-bottom: 16px;
+    }
+
+    .left-menu {
+        box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    }
+}
+
+/* CONTENT BÊN PHẢI (cột 9) – fallback */
+.layout-row > section.col-md-9,
+.layout-row > .col-md-9 {
+    flex: 1;
+    max-width: 100%;
+}
+
+/* =========================
+   5. USP SECTION (LỢI ÍCH)
+========================= */
+.usp-wrapper {
+    padding: 40px 0 60px;
+    background: #fff;
+}
+
+.usp-title h3 {
+    font-weight: 700;
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.usp-underline {
+    width: 60px;
+    height: 3px;
+    background: #ff7ba0;
+    margin: 0 auto;
+    border-radius: 2px;
+}
+
+.usp-container {
+    max-width: 1200px;
+    margin: 40px auto 0;
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.usp-item {
+    flex: 1;
+    min-width: 240px;
+    background: #fafafa;
+    padding: 22px 26px;
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    transition: .25s ease;
+}
+
+.usp-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.10);
+}
+
+.usp-item i {
+    font-size: 40px;
+    color: #ff7ba0;
+}
+
+.usp-item h4 {
+    font-size: 15px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.usp-item p {
+    font-size: 13px;
+    margin: 3px 0 0;
+    color: #777;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .usp-container {
+        flex-direction: column;
+    }
+
+    .leftmenu-wrapper {
+        width: 100%;
+        margin-bottom: 16px;
+    }
+
+    .left-menu {
+        position: static; /* mobile không cần sticky */
+    }
+}
+
+/* =========================
+   6. PRODUCT CARD + SLIDER
+========================= */
+.product-card {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: 0.25s ease;
+}
+
+.product-card img {
+    object-fit: cover;
+    height: 200px;
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+/* Badge giảm giá */
+.discount-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 999px;
+}
+
+/* Cỡ slide cho các swiper */
+.newestSwiper .swiper-slide,
+.bestSwiper .swiper-slide,
+.recommendSwiper .swiper-slide,
+.saleSwiper .swiper-slide {
+    width: 260px !important;
+}
+
+/* =========================
+   7. DANH MỤC NỔI BẬT
+========================= */
+.category-highlight {
+    background: #fff;
+    padding: 40px 0 20px;
+}
+
+.category-highlight h4 {
+    font-weight: 700;
+    font-size: 22px;
+    color: #333;
+}
+
+.cat-grid {
+    max-width: 1150px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 20px;
+}
+
+.cat-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 18px 14px;
+    background: #fafafa;
+    border-radius: 18px;
+    text-decoration: none;
+    color: #333;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    transition: 0.25s ease;
+}
+
+.cat-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.10);
+}
+
+.cat-icon i {
+    font-size: 32px;
+    color: #ff78a0;
+    margin-bottom: 8px;
+}
+
+.cat-item span {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* =========================
+   8. FOOTER
+========================= */
+.footer {
+    background: #f9f9f9;
+    color: #666;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 14px;
+    border-top: 1px solid #e5e5e5;
+    margin-top: 40px;
+}
+
+.footer .container {
+    max-width: 1200px;
+}
+
+/* =========================
+   9. CARD GRID TRONG "SẢN PHẨM THEO DANH MỤC"
+========================= */
+#products-section .row.g-3 .card {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    transition: 0.25s ease;
+}
+
+#products-section .row.g-3 .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.10);
+}
+
+#products-section .row.g-3 .card-img-top {
+    height: 260px;
+    object-fit: cover;
+    display: block;
+}
+
+#products-section .row.g-3 .card-body {
+    padding: 14px 16px;
+}
+
+/* ẢNH BLOG */
+.blog-thumb {
+    width: 100%;
+    height: 300px;      
+    object-fit: cover;  
+    display: block;
+}
+
+/* =========================
+   10. HOME – KHÁCH HÀNG TIÊU BIỂU
+========================= */
+.home-clients {
+    background: #fff;
+    padding: 32px 24px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    margin-top: 32px;
+}
+
+.home-clients h4 {
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #ff7ba0;  /* đổi sang màu chủ đạo */
+}
+
+.client-logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 28px;
+}
+
+.client-logo-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+}
+
+.client-logo-img {
+    max-height: 50px;      
+    width: auto;
+    object-fit: contain;
+    filter: grayscale(10%);
+    opacity: 0.9;
+    transition: .25s ease;
+}
+
+.client-logo-item:hover .client-logo-img {
+    transform: translateY(-2px);
+    filter: none;
+    opacity: 1;
+}
+
+/* =========================
+   11. HOME – HỆ THỐNG CỬA HÀNG
+========================= */
+.store-section {
+    background: #fff;
+    padding: 32px 24px 28px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    margin-top: 32px;
+}
+
+.store-section h4 {
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.store-section p.small {
+    font-size: 13px;
+}
+
+.store-section h6 {
+    font-weight: 600;
+    color: #008b57;      /* tiêu đề cột xanh nhẹ */
+    margin-bottom: 8px;
+}
+
+.store-section ul {
+    padding-left: 18px;
+    font-size: 14px;
+}
+
+.store-section ul li {
+    margin-bottom: 4px;
+}
+
+/* =========================
+   12. HOME – SLOGAN / CAM KẾT TRÊN FOOTER
+========================= */
+.home-slogan {
+    text-align: center;
+    padding: 24px 0 8px;
+    color: #555;
+    font-size: 15px;
+}
+
+.home-slogan .slogan-main {
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.home-slogan .slogan-sub {
+    font-size: 13px;
+    color: #777;
+}
